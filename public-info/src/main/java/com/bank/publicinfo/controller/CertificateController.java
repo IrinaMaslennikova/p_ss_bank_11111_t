@@ -36,7 +36,7 @@ public class CertificateController {
     public ResponseEntity<?> addNewCertificate(@RequestBody CertificateDTO certificateDTO) {
         Certificate certificate = CertificateMapper.mapper.certificateDTOtoCertificate(certificateDTO);
         certificateService.add(certificate);
-        return new ResponseEntity<>(HttpStatus.OK);
+        return ResponseEntity.ok(certificateDTO);
     }
 
     @PatchMapping("/{id}")

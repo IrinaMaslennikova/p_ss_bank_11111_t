@@ -1,6 +1,9 @@
 package com.bank.publicinfo.entity;
 
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 import org.springframework.lang.Nullable;
 
 import javax.persistence.*;
@@ -12,7 +15,8 @@ import java.sql.Time;
 
 @NoArgsConstructor
 @AllArgsConstructor
-@Data
+@Setter
+@Getter
 @Entity
 @Table(name = "atm", schema = "public_bank_information")
 public class Atm {

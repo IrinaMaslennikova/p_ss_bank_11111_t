@@ -1,7 +1,10 @@
 package com.bank.publicinfo.entity;
 
 import com.bank.publicinfo.validator.ValidPhoneNumber;
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 import org.springframework.lang.Nullable;
 
 import javax.persistence.*;
@@ -13,7 +16,8 @@ import java.sql.Time;
 
 @NoArgsConstructor
 @AllArgsConstructor
-@Data
+@Setter
+@Getter
 @Entity
 @Table(name = "branch", schema = "public_bank_information")
 public class Branch {

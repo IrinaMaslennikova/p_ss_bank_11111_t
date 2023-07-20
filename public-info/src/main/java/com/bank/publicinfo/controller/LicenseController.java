@@ -36,7 +36,7 @@ public class LicenseController {
     public ResponseEntity<?> addNewLicense(@RequestBody LicenseDTO licenseDTO) {
         License license = LicenseMapper.mapper.licenseDTOtoLicense(licenseDTO);
         licenseService.add(license);
-        return new ResponseEntity<>(HttpStatus.OK);
+        return ResponseEntity.ok(licenseDTO);
     }
 
     @PatchMapping("/{id}")

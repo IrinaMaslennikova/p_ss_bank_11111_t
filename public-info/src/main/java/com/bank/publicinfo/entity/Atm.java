@@ -52,8 +52,9 @@ public class Atm {
                 "    \"endOfWork\": \"" + endOfWork + "\",\n" +
                 "    \"allHours\": " + allHours + "\n" +
                 "    \"branch\": {\n" +
-                "           " + branch.toString() + "\n" +
+                "           " + ((branch != null) ? branch.toString() : "null") + "\n" +
                 "     }\n" +
                 "}";
     }
 }
+

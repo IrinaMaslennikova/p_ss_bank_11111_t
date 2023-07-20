@@ -51,3 +51,4 @@ public class CertificateController {
         return new ResponseEntity<>(HttpStatus.OK);
     }
 }
+

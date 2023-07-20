@@ -51,3 +51,4 @@ public class LicenseController {
         return new ResponseEntity<>(HttpStatus.OK);
     }
 }
+

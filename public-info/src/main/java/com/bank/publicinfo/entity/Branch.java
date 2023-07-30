@@ -1,10 +1,7 @@
 package com.bank.publicinfo.entity;
 
 import com.bank.publicinfo.validator.ValidPhoneNumber;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 import org.springframework.lang.Nullable;
 
 import javax.persistence.*;
@@ -16,6 +13,7 @@ import java.sql.Time;
 
 @NoArgsConstructor
 @AllArgsConstructor
+@Builder
 @Setter
 @Getter
 @Entity

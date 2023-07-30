@@ -1,9 +1,10 @@
-package com.bank.publicinfo.aspect;
+/*
+package com.bank.publicinfo.oldaspect;
 
-import com.bank.publicinfo.entity.Atm;
 import com.bank.publicinfo.entity.Audit;
+import com.bank.publicinfo.entity.BankDetails;
 import com.bank.publicinfo.repository.AuditDAO;
-import com.bank.publicinfo.service.AtmService;
+import com.bank.publicinfo.service.BankDetailsService;
 import lombok.AllArgsConstructor;
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.Around;
@@ -14,46 +15,46 @@ import org.springframework.stereotype.Component;
 import java.sql.Timestamp;
 import java.util.Date;
 
-// Заполнение аудита по Atm
+// Заполнение аудита по BankDetails
 
 @Component
-@AllArgsConstructor
 @Aspect
-public class MyLoggingAspectForAtm {
+@AllArgsConstructor
+public class MyLoggingAspectForBankDetails {
     private final AuditDAO auditDAO;
-    private final AtmService atmService;
+    private final BankDetailsService bankDetailsService;
 
-    // Метод для запонения аудита по созданию Atm
+    // Метод для запонения аудита по созданию BankDetails
 
-    @Around("execution (* com.bank.publicinfo.service.AtmServiceImpl.add(..))")
+    @Around("execution (* com.bank.publicinfo.service.BankDetailsServiceImpl.add(..))")
     public  Object aroundCreate(ProceedingJoinPoint jp) throws Throwable {
         String principalName = SecurityContextHolder.getContext().getAuthentication().getName();
         Object targetMethodResult = jp.proceed();
-        Atm entity = (Atm)jp.getArgs()[0];
+        BankDetails entity = (BankDetails) jp.getArgs()[0];
         Audit audit = new Audit();
         audit.setOperationType("CREATE"); // готово
         audit.setCreatedBy(principalName); //готово
         audit.setCreatedAt(new Timestamp((new Date()).getTime())); //готово
         audit.setEntityJson(entity.toString()); //готово
         audit.setNewEntityJson(entity.toString()); //готово
-        audit.setEntityType("Atm"); //готово
+        audit.setEntityType("BankDetails"); //готово
         auditDAO.save(audit);
         return targetMethodResult;
     }
 
-    // Метод для запонения аудита по изменению Atm
+    // Метод для запонения аудита по изменению BankDetails
 
-    @Around("execution (* com.bank.publicinfo.service.AtmServiceImpl.edit(..))")
+    @Around("execution (* com.bank.publicinfo.service.BankDetailsServiceImpl.edit(..))")
     public Object aroundUpdate(ProceedingJoinPoint jp) throws Throwable {
         String principalName = SecurityContextHolder.getContext().getAuthentication().getName();
-        Atm entity = (Atm) jp.getArgs()[0];
+        BankDetails entity = (BankDetails) jp.getArgs()[0];
         long id = (long) jp.getArgs()[1];
         entity.setId(id);
-        Atm oldEntity = atmService.getAtmById(id);
+        BankDetails oldEntity = bankDetailsService.getBankDetailsById(id);
         Audit oldAudit = auditDAO.findAuditByNewEntityJson(oldEntity.toString());
         Object targetMethodResult = jp.proceed();
         Audit audit = new Audit();
-        audit.setEntityType("Atm");
+        audit.setEntityType("BankDetails");
         audit.setOperationType("UPDATE");
         audit.setModifiedAt(new Timestamp((new Date()).getTime()));
         audit.setModifiedBy(principalName);
@@ -65,17 +66,17 @@ public class MyLoggingAspectForAtm {
         return targetMethodResult;
     }
 
-    // Метод для запонения аудита по удалению Atm
+    // Метод для запонения аудита по удалению BankDetails
 
-    @Around("execution (* com.bank.publicinfo.service.AtmServiceImpl.delete(..))")
-    public  Object aroundDelete(ProceedingJoinPoint jp) throws Throwable {
+    @Around("execution (* com.bank.publicinfo.service.BankDetailsServiceImpl.delete(..))")
+    public Object aroundDelete(ProceedingJoinPoint jp) throws Throwable {
         String principalName = SecurityContextHolder.getContext().getAuthentication().getName();
         long id = (long) jp.getArgs()[0];
-        Atm oldEntity = atmService.getAtmById(id);
+        BankDetails oldEntity = bankDetailsService.getBankDetailsById(id);
         Audit oldAudit = auditDAO.findAuditByNewEntityJson(oldEntity.toString());
         Object targetMethodResult = jp.proceed();
         Audit audit = new Audit();
-        audit.setEntityType("Atm");
+        audit.setEntityType("BankDetails");
         audit.setOperationType("DELETE");
         audit.setModifiedAt(new Timestamp((new Date()).getTime()));
         audit.setModifiedBy(principalName);
@@ -88,3 +89,4 @@ public class MyLoggingAspectForAtm {
     }
 }
 
+*/

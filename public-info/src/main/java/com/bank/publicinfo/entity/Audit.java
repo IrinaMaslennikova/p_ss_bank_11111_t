@@ -2,6 +2,7 @@ package com.bank.publicinfo.entity;
 
 import io.micrometer.core.lang.Nullable;
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -14,6 +15,7 @@ import java.sql.Timestamp;
 
 @NoArgsConstructor
 @AllArgsConstructor
+@Builder
 @Data
 @Entity
 @Table(name = "audit", schema = "public_bank_information")

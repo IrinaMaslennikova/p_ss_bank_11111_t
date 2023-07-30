@@ -1,9 +1,10 @@
-package com.bank.publicinfo.aspect;
+/*
+package com.bank.publicinfo.oldaspect;
 
 import com.bank.publicinfo.entity.Audit;
-import com.bank.publicinfo.entity.License;
+import com.bank.publicinfo.entity.Certificate;
 import com.bank.publicinfo.repository.AuditDAO;
-import com.bank.publicinfo.service.LicenseService;
+import com.bank.publicinfo.service.CertificateService;
 import lombok.AllArgsConstructor;
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.Around;
@@ -14,46 +15,46 @@ import org.springframework.stereotype.Component;
 import java.sql.Timestamp;
 import java.util.Date;
 
-// Заполнение аудита по Licence
+// Заполнение аудита по Certificate
 
 @Component
 @Aspect
 @AllArgsConstructor
-public class MyLoggingAspectForLicense {
+public class MyLoggingAspectForCertificate {
     private final AuditDAO auditDAO;
-    private final LicenseService licenseService;
+    private final CertificateService certificateService;
 
-    // Метод для запонения аудита по созданию License
+    // Метод для запонения аудита по созданию Certificate
 
-    @Around("execution (* com.bank.publicinfo.service.LicenseServiceImpl.add(..))")
+    @Around("execution (* com.bank.publicinfo.service.CertificateServiceImpl.add(..))")
     public  Object aroundCreate(ProceedingJoinPoint jp) throws Throwable {
         String principalName = SecurityContextHolder.getContext().getAuthentication().getName();
         Object targetMethodResult = jp.proceed();
-        License entity = (License) jp.getArgs()[0];
+        Certificate entity = (Certificate) jp.getArgs()[0];
         Audit audit = new Audit();
         audit.setOperationType("CREATE"); // готово
         audit.setCreatedBy(principalName); //готово
         audit.setCreatedAt(new Timestamp((new Date()).getTime())); //готово
         audit.setEntityJson(entity.toString()); //готово
         audit.setNewEntityJson(entity.toString()); //готово
-        audit.setEntityType("License"); //готово
+        audit.setEntityType("Certificate"); //готово
         auditDAO.save(audit);
         return targetMethodResult;
     }
 
-    // Метод для запонения аудита по изменению License
+    // Метод для запонения аудита по изменению Certificate
 
-    @Around("execution (* com.bank.publicinfo.service.LicenseServiceImpl.edit(..))")
+    @Around("execution (* com.bank.publicinfo.service.CertificateServiceImpl.edit(..))")
     public Object aroundUpdate(ProceedingJoinPoint jp) throws Throwable {
         String principalName = SecurityContextHolder.getContext().getAuthentication().getName();
-        License entity = (License) jp.getArgs()[0];
+        Certificate entity = (Certificate) jp.getArgs()[0];
         long id = (long) jp.getArgs()[1];
         entity.setId(id);
-        License oldEntity = licenseService.getLicenseById(id);
+        Certificate oldEntity = certificateService.getCertificateById(id);
         Audit oldAudit = auditDAO.findAuditByNewEntityJson(oldEntity.toString());
         Object targetMethodResult = jp.proceed();
         Audit audit = new Audit();
-        audit.setEntityType("License");
+        audit.setEntityType("Certificate");
         audit.setOperationType("UPDATE");
         audit.setModifiedAt(new Timestamp((new Date()).getTime()));
         audit.setModifiedBy(principalName);
@@ -65,17 +66,17 @@ public class MyLoggingAspectForLicense {
         return targetMethodResult;
     }
 
-    // Метод для запонения аудита по удалению License
+    // Метод для запонения аудита по удалению Certificate
 
-    @Around("execution (* com.bank.publicinfo.service.LicenseServiceImpl.delete(..))")
+    @Around("execution (* com.bank.publicinfo.service.CertificateServiceImpl.delete(..))")
     public  Object aroundDelete(ProceedingJoinPoint jp) throws Throwable {
         String principalName = SecurityContextHolder.getContext().getAuthentication().getName();
         long id = (long) jp.getArgs()[0];
-        License oldEntity = licenseService.getLicenseById(id);
+        Certificate oldEntity = certificateService.getCertificateById(id);
         Audit oldAudit = auditDAO.findAuditByNewEntityJson(oldEntity.toString());
         Object targetMethodResult = jp.proceed();
         Audit audit = new Audit();
-        audit.setEntityType("License");
+        audit.setEntityType("Certificate");
         audit.setOperationType("DELETE");
         audit.setModifiedAt(new Timestamp((new Date()).getTime()));
         audit.setModifiedBy(principalName);
@@ -88,3 +89,4 @@ public class MyLoggingAspectForLicense {
     }
 }
 
+*/

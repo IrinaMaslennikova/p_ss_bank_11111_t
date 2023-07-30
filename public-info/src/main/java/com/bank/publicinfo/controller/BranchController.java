@@ -31,7 +31,8 @@ public class BranchController {
     }
     @GetMapping("/{id}")
     public ResponseEntity<BranchDTO> getBranchById(@PathVariable("id") Long id) {
-        return new ResponseEntity<>(BranchMapper.mapper.branchToBranchDTO(branchService.getBranchById(id)), HttpStatus.OK);
+        BranchDTO branchDTO = BranchMapper.mapper.branchToBranchDTO(branchService.getBranchById(id));
+        return new ResponseEntity<>(branchDTO, HttpStatus.OK);
     }
     @PostMapping
     public ResponseEntity<?> addNewBranch(@Valid @RequestBody BranchDTO branchDTO, BindingResult bindingResult) {
@@ -44,7 +45,8 @@ public class BranchController {
     }
     @PatchMapping("/{id}")
     public ResponseEntity<?> updateBranchById(@RequestBody BranchDTO branchDTO, @PathVariable("id") long id) {
-        branchService.edit(BranchMapper.mapper.branchDTOtoBranch(branchDTO), id);
+        Branch branch = BranchMapper.mapper.branchDTOtoBranch(branchDTO);
+        branchService.edit(branch, id);
         return ResponseEntity.ok(branchDTO);
     }
 

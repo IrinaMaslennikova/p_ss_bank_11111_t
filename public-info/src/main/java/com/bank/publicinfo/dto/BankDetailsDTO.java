@@ -2,6 +2,7 @@ package com.bank.publicinfo.dto;
 
 import com.bank.publicinfo.entity.BankDetails;
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 

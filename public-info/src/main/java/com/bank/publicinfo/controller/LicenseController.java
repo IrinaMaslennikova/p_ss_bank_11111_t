@@ -29,7 +29,8 @@ public class LicenseController {
     }
     @GetMapping("/{id}")
     public ResponseEntity<LicenseDTO> getLicenseById(@PathVariable("id") Long id) {
-        return new ResponseEntity<>(LicenseMapper.mapper.licenseToLicenseDTO(licenseService.getLicenseById(id)), HttpStatus.OK);
+        LicenseDTO licenseDTO = LicenseMapper.mapper.licenseToLicenseDTO(licenseService.getLicenseById(id));
+        return new ResponseEntity<>(licenseDTO, HttpStatus.OK);
     }
 
     @PostMapping
@@ -41,7 +42,8 @@ public class LicenseController {
 
     @PatchMapping("/{id}")
     public ResponseEntity<?> updateLicenseById(@RequestBody LicenseDTO licenseDTO, @PathVariable("id") long id) {
-        licenseService.edit(LicenseMapper.mapper.licenseDTOtoLicense(licenseDTO), id);
+        License license = LicenseMapper.mapper.licenseDTOtoLicense(licenseDTO);
+        licenseService.edit(license, id);
         return ResponseEntity.ok(licenseDTO);
     }
 

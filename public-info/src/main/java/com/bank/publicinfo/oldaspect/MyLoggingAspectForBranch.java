@@ -1,9 +1,10 @@
-package com.bank.publicinfo.aspect;
+/*
+package com.bank.publicinfo.oldaspect;
 
 import com.bank.publicinfo.entity.Audit;
-import com.bank.publicinfo.entity.Certificate;
+import com.bank.publicinfo.entity.Branch;
 import com.bank.publicinfo.repository.AuditDAO;
-import com.bank.publicinfo.service.CertificateService;
+import com.bank.publicinfo.service.BranchService;
 import lombok.AllArgsConstructor;
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.Around;
@@ -14,46 +15,46 @@ import org.springframework.stereotype.Component;
 import java.sql.Timestamp;
 import java.util.Date;
 
-// Заполнение аудита по Certificate
+// Заполнение аудита по Branch
 
 @Component
 @Aspect
 @AllArgsConstructor
-public class MyLoggingAspectForCertificate {
+public class MyLoggingAspectForBranch {
     private final AuditDAO auditDAO;
-    private final CertificateService certificateService;
+    private final BranchService branchService;
 
-    // Метод для запонения аудита по созданию Certificate
+    // Метод для запонения аудита по созданию Branch
 
-    @Around("execution (* com.bank.publicinfo.service.CertificateServiceImpl.add(..))")
+    @Around("execution (* com.bank.publicinfo.service.BranchServiceImpl.add(..))")
     public  Object aroundCreate(ProceedingJoinPoint jp) throws Throwable {
         String principalName = SecurityContextHolder.getContext().getAuthentication().getName();
         Object targetMethodResult = jp.proceed();
-        Certificate entity = (Certificate) jp.getArgs()[0];
+        Branch entity = (Branch) jp.getArgs()[0];
         Audit audit = new Audit();
         audit.setOperationType("CREATE"); // готово
         audit.setCreatedBy(principalName); //готово
         audit.setCreatedAt(new Timestamp((new Date()).getTime())); //готово
         audit.setEntityJson(entity.toString()); //готово
         audit.setNewEntityJson(entity.toString()); //готово
-        audit.setEntityType("Certificate"); //готово
+        audit.setEntityType("Branch"); //готово
         auditDAO.save(audit);
         return targetMethodResult;
     }
 
-    // Метод для запонения аудита по изменению Certificate
+    // Метод для запонения аудита по изменению Branch
 
-    @Around("execution (* com.bank.publicinfo.service.CertificateServiceImpl.edit(..))")
+    @Around("execution (* com.bank.publicinfo.service.BranchServiceImpl.edit(..))")
     public Object aroundUpdate(ProceedingJoinPoint jp) throws Throwable {
         String principalName = SecurityContextHolder.getContext().getAuthentication().getName();
-        Certificate entity = (Certificate) jp.getArgs()[0];
+        Branch entity = (Branch) jp.getArgs()[0];
         long id = (long) jp.getArgs()[1];
         entity.setId(id);
-        Certificate oldEntity = certificateService.getCertificateById(id);
+        Branch oldEntity = branchService.getBranchById(id);
         Audit oldAudit = auditDAO.findAuditByNewEntityJson(oldEntity.toString());
         Object targetMethodResult = jp.proceed();
         Audit audit = new Audit();
-        audit.setEntityType("Certificate");
+        audit.setEntityType("Branch");
         audit.setOperationType("UPDATE");
         audit.setModifiedAt(new Timestamp((new Date()).getTime()));
         audit.setModifiedBy(principalName);
@@ -65,17 +66,17 @@ public class MyLoggingAspectForCertificate {
         return targetMethodResult;
     }
 
-    // Метод для запонения аудита по удалению Certificate
+    // Метод для запонения аудита по удалению Branch
 
-    @Around("execution (* com.bank.publicinfo.service.CertificateServiceImpl.delete(..))")
-    public  Object aroundDelete(ProceedingJoinPoint jp) throws Throwable {
+    @Around("execution (* com.bank.publicinfo.service.BranchServiceImpl.delete(..))")
+    public Object aroundDelete(ProceedingJoinPoint jp) throws Throwable {
         String principalName = SecurityContextHolder.getContext().getAuthentication().getName();
         long id = (long) jp.getArgs()[0];
-        Certificate oldEntity = certificateService.getCertificateById(id);
+        Branch oldEntity = branchService.getBranchById(id);
         Audit oldAudit = auditDAO.findAuditByNewEntityJson(oldEntity.toString());
         Object targetMethodResult = jp.proceed();
         Audit audit = new Audit();
-        audit.setEntityType("Certificate");
+        audit.setEntityType("Branch");
         audit.setOperationType("DELETE");
         audit.setModifiedAt(new Timestamp((new Date()).getTime()));
         audit.setModifiedBy(principalName);
@@ -88,3 +89,4 @@ public class MyLoggingAspectForCertificate {
     }
 }
 
+*/

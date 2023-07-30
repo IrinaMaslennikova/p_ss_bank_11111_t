@@ -29,7 +29,8 @@ public class CertificateController {
     }
     @GetMapping("/{id}")
     public ResponseEntity<CertificateDTO> getCertificateById(@PathVariable("id") Long id) {
-        return new ResponseEntity<>(CertificateMapper.mapper.certificateToCertificateDTO(certificateService.getCertificateById(id)), HttpStatus.OK);
+        CertificateDTO certificateDTO = CertificateMapper.mapper.certificateToCertificateDTO(certificateService.getCertificateById(id));
+        return new ResponseEntity<>(certificateDTO, HttpStatus.OK);
     }
 
     @PostMapping
@@ -41,7 +42,8 @@ public class CertificateController {
 
     @PatchMapping("/{id}")
     public ResponseEntity<?> updateCertificateById(@RequestBody CertificateDTO certificateDTO, @PathVariable("id") long id) {
-        certificateService.edit(CertificateMapper.mapper.certificateDTOtoCertificate(certificateDTO), id);
+        Certificate certificate = CertificateMapper.mapper.certificateDTOtoCertificate(certificateDTO);
+        certificateService.edit(certificate, id);
         return ResponseEntity.ok(certificateDTO);
     }
 

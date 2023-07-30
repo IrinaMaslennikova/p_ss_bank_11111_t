@@ -3,6 +3,7 @@ package com.bank.publicinfo.dto;
 import com.bank.publicinfo.entity.Branch;
 import com.bank.publicinfo.validator.ValidPhoneNumber;
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 

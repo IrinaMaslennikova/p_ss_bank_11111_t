@@ -29,7 +29,8 @@ public class BankDetailsController {
     }
     @GetMapping("/{id}")
     public ResponseEntity<BankDetailsDTO> getBankDetailsById(@PathVariable("id") Long id) {
-        return new ResponseEntity<>(BankDetailsMapper.mapper.bankDetailsToBankDetailsDTO(bankDelailsService.getBankDetailsById(id)), HttpStatus.OK);
+        BankDetailsDTO bankDetailsDTO = BankDetailsMapper.mapper.bankDetailsToBankDetailsDTO(bankDelailsService.getBankDetailsById(id));
+        return new ResponseEntity<>(bankDetailsDTO, HttpStatus.OK);
     }
     @PostMapping
     public ResponseEntity<?> addNewBankDetails(@RequestBody BankDetailsDTO bankDetailsDTO) {
@@ -39,7 +40,8 @@ public class BankDetailsController {
     }
     @PatchMapping("/{id}")
     public ResponseEntity<?> updateBankDetailsById(@RequestBody BankDetailsDTO bankDetailsDTO, @PathVariable("id") long id) {
-        bankDelailsService.edit(BankDetailsMapper.mapper.bankDetailsDTOtoBankDetails(bankDetailsDTO), id);
+        BankDetails bankDetails = BankDetailsMapper.mapper.bankDetailsDTOtoBankDetails(bankDetailsDTO);
+        bankDelailsService.edit(bankDetails, id);
         return ResponseEntity.ok(bankDetailsDTO);
     }
 

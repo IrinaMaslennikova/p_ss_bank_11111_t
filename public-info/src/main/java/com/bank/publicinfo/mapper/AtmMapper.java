@@ -12,6 +12,7 @@ import org.mapstruct.factory.Mappers;
 
 @Mapper
 public interface AtmMapper {
+
     AtmMapper mapper = Mappers.getMapper(AtmMapper.class);
 
     @Mapping(target = "id", ignore = true)

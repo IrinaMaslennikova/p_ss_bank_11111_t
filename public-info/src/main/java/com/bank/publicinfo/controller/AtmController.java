@@ -30,18 +30,21 @@ public class AtmController {
     }
     @GetMapping("/{id}")
     public ResponseEntity<AtmDTO> getAtmById(@PathVariable("id") Long id) {
-        return new ResponseEntity<>(AtmMapper.mapper.atmToAtmDTO(atmService.getAtmById(id)), HttpStatus.OK);
+        AtmDTO atmDTO = AtmMapper.mapper.atmToAtmDTO(atmService.getAtmById(id));
+        return new ResponseEntity<>(atmDTO, HttpStatus.OK);
     }
 
     @PostMapping
     public ResponseEntity<?> addNewAtm(@RequestBody AtmDTO atmDTO) throws ValidatorException {
-        atmService.add(AtmMapper.mapper.atmDTOtoAtm(atmDTO));
+        Atm atm = AtmMapper.mapper.atmDTOtoAtm(atmDTO);
+        atmService.add(atm);
         return ResponseEntity.ok(atmDTO);
     }
 
     @PatchMapping("/{id}")
     public ResponseEntity<?> updateAtmById(@RequestBody AtmDTO atmDTO, @PathVariable("id") long id) {
-        atmService.edit(AtmMapper.mapper.atmDTOtoAtm(atmDTO), id);
+        Atm atm = AtmMapper.mapper.atmDTOtoAtm(atmDTO);
+        atmService.edit(atm, id);
         return ResponseEntity.ok(atmDTO);
     }
 

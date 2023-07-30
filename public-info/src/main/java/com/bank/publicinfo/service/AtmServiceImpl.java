@@ -17,7 +17,9 @@ import java.util.Optional;
 public class AtmServiceImpl implements AtmService {
     private final AtmDAO atmDAO;
     @Autowired
-    public AtmServiceImpl(AtmDAO atmDAO) {this.atmDAO = atmDAO;}
+    public AtmServiceImpl(AtmDAO atmDAO) {
+        this.atmDAO = atmDAO;
+    }
     @Override
     public List<Atm> allAtms() {
         return atmDAO.findAll();

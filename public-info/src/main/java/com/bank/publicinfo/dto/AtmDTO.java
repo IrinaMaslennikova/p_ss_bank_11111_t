@@ -3,6 +3,7 @@ package com.bank.publicinfo.dto;
 import com.bank.publicinfo.entity.Atm;
 import com.bank.publicinfo.entity.Branch;
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.springframework.lang.Nullable;

@@ -1,14 +1,9 @@
 package com.bank.publicinfo.controller;
 
-import com.bank.publicinfo.dto.AtmDTO;
 import com.bank.publicinfo.dto.AuditDTO;
-import com.bank.publicinfo.entity.Atm;
 import com.bank.publicinfo.entity.Audit;
-import com.bank.publicinfo.mapper.AtmMapper;
 import com.bank.publicinfo.mapper.AuditMapper;
-import com.bank.publicinfo.service.AtmService;
 import com.bank.publicinfo.service.AuditService;
-import com.bank.publicinfo.service.AuditServiceImpl;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mapstruct.factory.Mappers;
@@ -22,7 +17,6 @@ import java.sql.Timestamp;
 import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.when;
 
 @ExtendWith(MockitoExtension.class)
